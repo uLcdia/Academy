@@ -1,6 +1,6 @@
-# Academy <img src="./resources/Jedi_symbol.svg" alt="Jedi" width="200"/>
+# Academy <img src="./resources/Jedi_symbol.svg" alt="Jedi" width="40"/>
 
-## Why?
+## Why
 
 The Jedi Council requires young padawan to master The Force through coding.
 
