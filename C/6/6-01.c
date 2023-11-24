@@ -1,9 +1,10 @@
 #include <stdio.h>
+#define N 100
 
 int main(void)
 {
-    int prime[100] = {2}, length = 1, flag;
-    for (int i = 3; i <= 100; i++)
+    int prime[N] = {2}, length = 1, flag;
+    for (int i = 3; i <= N; i++)
     {
         flag = 0;
         for (int j = 0; j < length; j++)

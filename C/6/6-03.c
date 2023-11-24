@@ -22,9 +22,7 @@ int main(void)
 
     int sum = 0;
     for (int i = 0; i < N; i++)
-    {
         sum += l[i][N-1-i] + l[i][i];
-    }
     sum -= l[N/2][N/2];
 
     printf("%d.\nThis is the Matrix.",sum);

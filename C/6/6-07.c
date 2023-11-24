@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define n 3 // odd only; haven't figured out how to solve for even n
+#define n 7 // odd only; haven't figured out how to solve for even n
 
 int main(void)
 {

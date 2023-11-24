@@ -2,10 +2,20 @@
 #include <stdlib.h>
 #include <time.h>
 #define N 5 // only odd N
+int matrix(int);
 
 int main(void)
 {
     srand(time(NULL));
+    int i = rand() % 1000;
+    while(matrix(i++) == 0)
+        printf("No such spot\n");
+    return 0;
+}
+
+int matrix(int i)
+{
+    srand(i);
     int l[N][N], max[N] = {0}, min[N] = {0};
     printf("What is the Matrix?\n");
 
@@ -38,18 +48,18 @@ int main(void)
     {
         mv = l[0][i];
         for (int j = 0; j < N; j++)
-        {
             if (l[j][i] < mv)
             {
                 mv = l[j][i];
                 min[i] = j;
             }
-        }
     }
+    int flag = 0;
     for (int i = 0; i < N; i++) // find the spot
-    {
         if (i == min[max[i]])
-            printf("loc(%d,%d) = %d",max[i],min[i],l[max[i]][min[i]]);
-    }
-    return 0;
+        {
+            printf("loc(%d,%d) = %d\n",i,max[i],l[max[i]][min[i]]);
+            flag++;
+        }
+    return flag;
 }
