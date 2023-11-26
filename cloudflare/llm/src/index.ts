@@ -71,7 +71,7 @@ export default {
             margin: 0px 0px 10px 5px;
             border-radius: 50%;
             box-sizing: border-box;
-            background-color: aquamarine;
+            background-color: cyan;
             font-family: "Arial", Arial, sans-serif;
             font-weight: 600;
             font-size: 16px;
@@ -99,7 +99,7 @@ export default {
       </head>
       <body>
         <form action="" method="POST" id="question-form">
-          <input type="text" id="question" name="question">
+          <input type="text" id="question" name="question" autofocus>
           <input type="submit" value="" id="submit-button">
         </form>
         <div id="response"></div>
@@ -111,7 +111,7 @@ export default {
             const submitButton = document.getElementById('submit-button');
 
             submitButton.value = ""
-            submitButton.style.backgroundColor = 'lightcoral';
+            submitButton.style.backgroundColor = 'coral';
             submitButton.disabled = true;
 
             const response = await fetch('', { method: 'POST', body: formData });
@@ -132,8 +132,10 @@ export default {
             }
             responseDiv.insertBefore(responseForm, responseDiv.firstChild);
 
+            document.getElementById('question').focus();
+
             submitButton.value = ""
-            submitButton.style.backgroundColor = 'aquamarine';
+            submitButton.style.backgroundColor = 'cyan';
             submitButton.disabled = false;
 
           });
