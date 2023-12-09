@@ -19,11 +19,8 @@ void get_schtrlong(const char * c, char * word)
     char temp[25] = "";
     while (*c != '\0' && *c != '\n')
     {
-        if (*c != ' ')
-        {
-            temp[length] = *c;
-            length++;
-        }
+        if (*c != ' ' || *c != '.' || *c != ',' || *c != '!' || *c != '?')
+            temp[length++] = *c;
         else if (length > longest)
         {
             for (i = 0; i < length; i++)

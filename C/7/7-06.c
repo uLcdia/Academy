@@ -4,7 +4,7 @@ void strcat(char *, const char*);
 
 int main(void)
 {
-    char s[] = "gonna make him an offer", d[] = " he can't refuse.";
+    char s[100] = "gonna make him an offer", d[] = " he can't refuse.";
     strcat(s,d);
     puts(s);
     return 0;

@@ -6,7 +6,7 @@
 *.ilk
 *.obj
 *.pdb
-C/local/
 */*/_template.c
+
 
 # Cloudflare

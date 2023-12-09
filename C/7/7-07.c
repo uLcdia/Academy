@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void extract_vowels(char *, char *);
+void extract_vowels(const char *, char *);
 
 int main(void)
 {
@@ -10,7 +10,7 @@ int main(void)
     return 0;
 }
 
-void extract_vowels(char *s, char *d)
+void extract_vowels(const char *s, char *d)
 {
     while (*(s++) != '\0')
         if (*s == 'a' || *s == 'e' || *s == 'i' || *s == 'o' || *s == 'u')
