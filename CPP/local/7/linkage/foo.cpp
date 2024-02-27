@@ -2,7 +2,7 @@
 
 [[maybe_unused]] constexpr int constexprIntFoo { 1 };       // constexpr internal by default
 [[maybe_unused]] const int constIntFoo { 3 };               // const internal by default
-[[maybe_unused]] static int staticIntFoo { 5 };             // int is extern by default, static makes its linkage internal
+[[maybe_unused]] static int staticIntFoo { 5 };             // int (global variable) is extern by default, static makes its linkage internal
 
 int intX { 7 };                                             // don't write extern, it's extern by default
 // extern constexpr int constexprIntY { 9 };                // don't extern a constexpr, the constexpr value should be known by compiler not linker
