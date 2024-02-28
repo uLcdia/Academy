@@ -4,9 +4,9 @@
 
 int main()
 {
-    constexpr int zero = 0;
-    constexpr int one = 1;
-    constexpr int number = zero;
+    constexpr int zero {0};
+    constexpr int one {1};
+    constexpr int number {zero};
 
     if constexpr (number == zero)
     {
