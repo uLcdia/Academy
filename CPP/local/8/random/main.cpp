@@ -15,9 +15,18 @@ int main()
     [[maybe_unused]] constexpr int newlineCount {15};
     
     // Only seed a PRNG once
-    // std::mt19937 mt {static_cast<std::mt19937::result_type>(std::chrono::steady_clock::now().time_since_epoch().count())};  // set seed using time. steady_clock has a more granular tick than time()
-    std::mt19937 mt {std::random_device{}()}; // ask the OS for a random number. caution: std::random_device**{}**(), both curly braces and parentheses. 
+
+    // choice 1 // std::mt19937 mt {static_cast<std::mt19937::result_type>(std::chrono::steady_clock::now().time_since_epoch().count())};  // set seed using time. steady_clock has a more granular tick than time()
+
+    // choice 2 // std::mt19937 mt {std::random_device{}()}; // ask the OS for a random number. caution: std::random_device**{}**(), both curly braces and parentheses. 
     // Q: What does std::random_device{}() mean? // std::random_device{} creates a value-initialized temporary object of type std::random_device. The () then calls operator() on that temporary object, which returns a randomized value
+
+    // choice 3 // best quality random seed
+    // Mersenne Twister and underseeding issues: use std::random_device to give std::seed_seq more data to work with
+    std::random_device rd {};
+    std::seed_seq ss {rd(), rd(), rd(), rd(), rd(), rd(), rd(), rd()}; // get 8 integers of random numbers from std::random_device for our seed
+	std::mt19937 mt {ss}; // initialize our Mersenne Twister with the std::seed_seq
+
 
     // testing random num generator executing duration (testing chrono, seems fun)
 
