@@ -24,11 +24,29 @@ TNum add(TNum x, TNum y)
     return (x + y);
 }
 
+/*
 template <typename TNum>
 double add(TNum x, double y)    // you can mix type template and non-template parameters
 {
     print("Using add<TNum>(TNum x, double y): ");
     return (static_cast<double>(x) + y);
+}
+*/
+
+/*
+template <typename T, typename U>
+auto add(T x, U y)
+{
+    print("Using add(T x, U y): ");
+    return (x + y);
+}
+*/
+
+// Abbreviated function templates
+auto add(auto x, auto y)
+{
+    print("Using add(auto x, auto y): ");
+    return (x + y);
 }
 
 void print(bool x)
