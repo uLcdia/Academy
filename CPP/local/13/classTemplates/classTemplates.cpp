@@ -36,8 +36,7 @@ int main()
     Foo intFoo {{100, 200}}; // if no default type set in template above: clang: cannot deduce class template arguments; Class template argument deduction (CTAD) C++17
     std::cout << "intTwin: " << intTwin.twin.a << ' ' << intTwin.twin.b << " max: " << max(intTwin);  // can max<int>(intTwin);
     
-    using Loc = Foo<int>;
-
+    using Loc = Foo<int>;   // this is a type alias, not a template alias; check out https://www.learncpp.com/cpp-tutorial/alias-templates/
     Loc locFoo {{60, 120}, "No lollygagging."};
 
     return 0;
