@@ -30,6 +30,16 @@ void printCar(Car& source)
     std::cout << source.getModel() << ": " << source.getHorsepower() << "hp.\n";
 }
 
+void printCarValue(Car source)
+{
+    std::cout << source.getModel() << ": " << source.getHorsepower() << "hp.\n";
+}
+
+Car getMustang()
+{
+    return {"Ford Mustang Shelby GT500 1967", 355};
+}
+
 int main()
 {
     Car mercedes {};                            // {"Mercedes AMG One", 1049}
@@ -41,6 +51,15 @@ int main()
     printCar(subaru);
     printCar(ferarri);
     printCar(porsche);
+
+    // temporary class objects
+    // this passes a rvalue expression which can not be used as reference; printCar() error: initial value of reference to non-const must be an lvalue
+    printCarValue(Car {"Mitsubishi Lancer Evolution X", 291});
+    printCarValue({"Mazda MX-5 Miata 1990", 116});
+
+    Car ford {getMustang()};
+    printCar(ford);
+    printCarValue(getMustang());
 
     return 0;
 }
