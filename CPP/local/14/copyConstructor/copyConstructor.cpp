@@ -6,7 +6,7 @@ class Fraction
 {
 public:
     Fraction(int numerator = 0, int denominator = 1)
-        : m_numerator {numerator}
+        : m_numerator {numerator} // if m_numerator = numerator: error: expected a '(' or a '{'. only direct initialization can be used in a constructor member initializer list
         , m_denominator {denominator}
     {}
 
@@ -16,7 +16,7 @@ public:
     // Access controls work on a per-class basis (not a per-object basis). This means the member functions of a class can access the private members of any class object of the same type (not just the implicit object).
     {
         std::cout << "COPY CONSTRUCTOR\n";
-    }  // Copy constructors should have no side effects beyond copying.
+    }  // Copy constructors should have no side effects beyond copying. Generally there shouldn't be explicit copy constructor, this one is just for observational purpose
 
     void print() const {std::cout << "print(): Fraction(" << m_numerator << ", " << m_denominator << ")\n";}
 
@@ -26,7 +26,7 @@ private:
     int m_denominator {1};
 };
 
-void printFraction(Fraction f)
+void printFraction(Fraction f) // f: Fraction(const Fraction& fraction); copy constructor
 {
     f.print();
 }
@@ -34,7 +34,9 @@ void printFraction(Fraction f)
 Fraction generateFraction(int numerator, int denominator)
 {
     Fraction f {numerator, denominator};
-    return f;   // optimized: When generateFraction returns a Fraction back to main, the copy constructor is implicitly called again.
+    return f;
+    // if not optimized: When generateFraction returns a Fraction back to main, the copy constructor is implicitly called again.
+    // optimized: copy elision, the copy constructor is elided
 }
 
 int main()
