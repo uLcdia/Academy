@@ -32,17 +32,15 @@ auto foo(const auto& source, std::size_t index) // argument source passed by con
     return source;
 }
 
-auto calculateAverage(const auto& source, std::size_t num)
+auto calculateAverage(const auto& source)
 {
-    assert((num == source.size()) && "num doesn't match.");
-
     double average {};
-    for(std::size_t i = 0; i < num; i++)
+    for(std::size_t i = 0; i < source.size(); i++)
     {
         average += source[i];
     }
 
-    return (average / num);
+    return (average / source.size());
 }
 
 
@@ -76,7 +74,7 @@ int main()
     // loop
     std::vector v7 {0, 1, 2, 3, 4};
     std::cout << "loop: ";
-    std::cout << "calculateAverage(v7, 5) = " << calculateAverage(v7, 5) << '\n';
+    std::cout << "calculateAverage(v7) = " << calculateAverage(v7) << '\n';
 
     return 0;
 }
