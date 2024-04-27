@@ -20,10 +20,10 @@ public:
 
     Time& operator+=(const Time& source);
     Time& operator-=(const Time& source);
+    Time& operator++();
+    Time& operator--();
     Time operator++(int);
-    Time operator++();
     Time operator--(int);
-    Time operator--();
 
 private:
     int m_hour {};
@@ -84,31 +84,29 @@ Time& Time::operator-=(const Time& source)
     amend();
     return *this;
 }
-Time Time::operator++(int)
-{
-    Time timeTemp = *this;
-    m_second++;
-    amend();
-    return timeTemp;
-}
-Time Time::operator++()
+Time& Time::operator++() // prefix ++time
 {
     m_second++;
     amend();
     return *this;
 }
-Time Time::operator--(int)
+Time Time::operator++(int) // postfix time++
 {
     Time timeTemp = *this;
-    m_second--;
-    amend();
+    ++(*this);
     return timeTemp;
 }
-Time Time::operator--()
+Time& Time::operator--() // prefix --time
 {
     m_second--;
     amend();
     return *this;
+}
+Time Time::operator--(int) // postfix time--
+{
+    Time timeTemp = *this;
+    --(*this);
+    return timeTemp;
 }
 
 int main()
