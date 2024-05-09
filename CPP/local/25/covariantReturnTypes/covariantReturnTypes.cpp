@@ -69,9 +69,26 @@ int main()
     std::cout << '\n';
 
     // case 3
-    C& ref{ d }; // ref is a C& referencing D object
-    ref.get().print(); // ref.get() calls D::get() which returns an A& referencing a B object, A&.print() calls A::print() because print() is a non-virtual function of A
-    ref.get().vprint(); // ref.get() calls D::get() which returns an A& referencing a B object, A&.print() calls B::print() because vprint() being a virtual function, causes virtual function resolution being used to find A& is referencing B, B::print() gets called
+    C& ref{ d }; // ref is a C& referencing a D object
+
+    // ref.get() calls D::get() which returns an A& referencing a B object
+    // A&.print() calls A::print() because print() is a non-virtual function of A
+
+    // get() is a virtual function, calling it requires checking the virtual table
+    // ref.__vPtr: *__vPtr of d. ref.get() resolves to d.__vPtr->d.get()
+    // d.get() returns a B object, ref.get() is an A& referencing a B object
+    // print() is not a virtual function, calling it doesn't require checking the virtual table
+    // A&.print() calls A::print()
+    ref.get().print();
+
+    // ref.get() calls D::get() which returns an A& referencing a B object
+    // A&.print() calls B::print() because vprint() is a virtual function
+    // causing virtual function resolution being used to find A& is referencing B, B::print() gets called
+
+    
+    // vprint() is a virtual function, calling it requires checking the virtual table
+    // ref.get().__vPtr: *__vPtr of m_b. ref.get().vprint() resolves to m_b.__vPtr->m_b.vprint()
+    ref.get().vprint(); 
     std::cout << '\n';
 
     return 0;
