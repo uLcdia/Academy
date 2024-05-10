@@ -5,8 +5,8 @@
 class Mammal
 {
 public:
-    Mammal(int foo) : m_foo {foo} {std::cout << "constructing Mammal." << std::endl;}
-    ~Mammal() {std::cout << "destructing Mammal." << std::endl;}
+    explicit Mammal(int foo) : m_foo {foo} {std::cout << "constructing Mammal." << std::endl;}
+    virtual ~Mammal() {std::cout << "destructing Mammal." << std::endl;}
 private:
     [[maybe_unused]]int m_foo {};
 };
@@ -15,7 +15,7 @@ class Dog : public Mammal
 {
 public:
     Dog(int foo, int bar) : Mammal {foo}, m_bar {bar} {std::cout << "constructing Dog." << std::endl;}
-    ~Dog() {std::cout << "destructing Dog." << std::endl;}
+    ~Dog() override {std::cout << "destructing Dog." << std::endl;}
 private:
     [[maybe_unused]] int m_bar {};
 };
