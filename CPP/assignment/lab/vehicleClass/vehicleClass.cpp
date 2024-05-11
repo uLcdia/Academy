@@ -5,139 +5,37 @@
 
 #include <iostream>
 
-class Vehicle
-{
-public:
-    Vehicle(int weight, int numOfPassenger)
-        : m_weight {weight}, m_numOfPassenger {numOfPassenger}
-    {}
-
-    ~Vehicle() = default;
-
-    virtual void drive() const= 0;
-
-    int getWeight() const
-    {
-        return m_weight;
-    }
-    void setWeight(int weight)
-    {
-        m_weight = weight;
-    }
-    int getNum() const
-    {
-        return m_numOfPassenger;
-    }
-    void setNum(int numOfPassenger)
-    {
-        m_numOfPassenger = numOfPassenger;
-    }
-
-protected:
-    int m_weight {}; // unit: ton
-    int m_numOfPassenger {};
-};
-
-class Car : virtual public Vehicle
-{
-public:
-    Car(int weight, int numOfPassenger)
-        : Vehicle {weight, numOfPassenger}
-    {}
-    
-    ~Car() = default;
-
-    void drive() const override
-    {
-        std::cout << "Car drives on the road.\n";
-    }
-};
-
-class Ship : virtual public Vehicle
-{
-public:
-    Ship(int weight, int numOfPassenger)
-        : Vehicle {weight, numOfPassenger}
-    {}
-    
-    ~Ship() = default;
-
-    void drive() const override
-    {
-        std::cout << "Ship sails on the water.\n";
-    }
-
-};
-
-class Airplane : public Vehicle
-{
-public:
-    Airplane(int weight, int numOfPassenger)
-        : Vehicle {weight, numOfPassenger}
-    {}
-    
-    ~Airplane() = default;
-
-    void drive() const override
-    {
-        std::cout << "Airplane flies in the air.\n";
-    }
-};
-
-class Amphibian : public Car, public Ship
-{
-public:
-    enum class Flag {ROAD, WATER};
-
-    Amphibian(int weight, int numOfPassenger)
-        : Vehicle {weight, numOfPassenger}
-        , Car {weight, numOfPassenger}
-        , Ship {weight, numOfPassenger}      
-    {}
-    
-    ~Amphibian() = default;
-
-    void drive() const override
-    {
-        if (m_flag == Flag::ROAD)
-            Car::drive();
-        else // m_flag == Flag::WATER
-            Ship::drive();
-    }
-
-    void setFlag(Flag flag)
-    {
-        m_flag = flag;
-    }
-
-private:
-    Flag m_flag {Flag::ROAD}; // 0: road, 1: water
-};
+#include "airplane.h"   // for Airplane class
+#include "amphibian.h"  // for Amphibian class
+#include "car.h"        // for Car class
+#include "ship.h"       // for Ship class
+#include "vehicle.h"    // for Vehicle class (which is an abstract class)
 
 int main()
 {
     // Vehicle vehicleObj {1, 2}; // error: object of abstract class type "Vehicle" is not allowed
 
-    Car subaruWrxSti {2, 5};
+    Car car {2, 5};
     std::cout << "Subaru WRX STI: ";
-    subaruWrxSti.drive();
+    car.drive();
 
-    Ship titanic {52310, 2200};
-    titanic.setWeight(65535);
-    titanic.setNum(705);
+    Ship ship {52310, 2200};
+    // simulating a shipwreck
+    ship.setWeight(65535);
+    ship.setNum(705);
     std::cout << "Titanic: ";
-    titanic.drive();
+    ship.drive();
 
-    Airplane wayfarer515 {42, 220};
-    std::cout << "Boeing 737-900: ";
-    wayfarer515.drive();
+    Airplane airplane {42, 220};
+    std::cout << "Wayfarer 515: ";
+    airplane.drive();
 
-    Amphibian amphicar {1, 4};
+    Amphibian amphibian {1, 4}; // default flag = Amphibian::Flag::ROAD
     std::cout << "Amphicar: ";
-    amphicar.drive();
-    amphicar.setFlag(Amphibian::Flag::WATER);
+    amphibian.drive();
+    amphibian.setFlag(Amphibian::Flag::WATER);
     std::cout << "Amphicar: ";
-    amphicar.drive();
+    amphibian.drive();
 
     return 0;
 }
